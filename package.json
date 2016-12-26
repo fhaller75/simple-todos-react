@@ -10,9 +10,14 @@
     "babel-runtime": "6.18.0",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.4.1",
+    "react-addons-pure-render-mixin": "^15.4.1",
     "react-dom": "^15.4.1"
   },
   "eslintConfig": {
+    "env": {
+      "meteor": true,
+      "browser": true
+    },
     "parser": "babel-eslint",
     "parserOptions": {
       "allowImportExportEverywhere": true
@@ -25,10 +30,22 @@
       "plugin:meteor/recommended"
     ],
     "settings": {
-      "import/resolver": "meteor",
-      "import/core-modules": "meteor/meteor"
+      "import/resolver": "meteor"
     },
-    "rules": {}
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "import/no-extraneous-dependencies": "off",
+      "import/no-absolute-path": "off",
+      "import/extensions": "off"
+    }
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
