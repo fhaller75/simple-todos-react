@@ -7,6 +7,19 @@ import Task from './Task.jsx';
 
 // App component - represents the whole app
 class App extends Component {
+  handleSubmit(event) {
+    event.preventDefault();
+
+    // Find the text field via the React ref
+    // const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const text = this.textInput.value.trim();
+
+    Tasks.insert({
+      text,
+      createdAt: new Date(),
+    });
+  }
+
   renderTasks() {
     return this.props.tasks.map((task) => (
       <Task key={task._id} task={task} />
@@ -18,6 +31,13 @@ class App extends Component {
       <div className="container">
         <header>
           <h1>Todo List</h1>
+          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+            <input
+              type="text"
+              ref={(node) => { this.textInput = node; }}
+              placeholder="Type to add new tasks"
+            />
+          </form>
         </header>
 
         <ul>
@@ -32,8 +52,6 @@ App.PropTypes = {
   tasks: PropTypes.array.isRequired,
 };
 
-export default createContainer(() => {
-  return {
-    tasks: Tasks.find({}).fetch(),
-  };
-}, App);
+export default createContainer(() => ({
+  tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
+}), App);
