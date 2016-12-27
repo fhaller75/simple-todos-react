@@ -18,6 +18,8 @@ class App extends Component {
       text,
       createdAt: new Date(),
     });
+
+    this.textInput.value = '';
   }
 
   renderTasks() {
