@@ -32,14 +32,21 @@ export default class Task extends Component {
           onClick={this.toggleChecked.bind(this)}
         />
 
-        <span className="text">{this.props.task.text}</span>
+        <span className="text">
+          <strong>{this.props.task.username}</strong>: {this.props.task.text}
+        </span>
       </li>
     );
   }
 }
 
-Task.PropTypes = {
+Task.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
-  task: PropTypes.object.isRequired,
+  task: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    checked: PropTypes.bool,
+    text: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+  }).isRequired,
 };
